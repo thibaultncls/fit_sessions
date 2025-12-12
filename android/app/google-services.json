@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1006774577580",
+    "project_id": "fit-sessions",
+    "storage_bucket": "fit-sessions.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1006774577580:android:1eb2f4f9dc906139cb3209",
+        "android_client_info": {
+          "package_name": "com.example.fit_sessions"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI4Qk3pALuDwH-31Wz8ubOKvPGBVMho-M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
