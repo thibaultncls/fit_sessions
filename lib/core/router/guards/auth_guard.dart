@@ -17,13 +17,13 @@ class AuthGuard extends AutoRouteGuard {
     result.fold(
       (failure) {
         // In case of failure, we consider the user as not authenticated
-        router.replace(AuthRoute());
+        router.replace(LoginRoute());
       },
       (isSignedIn) {
         if (isSignedIn) {
           resolver.next(true);
         } else {
-          router.replace(AuthRoute());
+          router.replace(LoginRoute());
         }
       },
     );

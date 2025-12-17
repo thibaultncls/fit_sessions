@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class AuthPage extends StatefulWidget {
-  const AuthPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<AuthPage> createState() => _AuthPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _AuthPageState extends State<AuthPage> {
+class _LoginPageState extends State<LoginPage> {
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
 
@@ -222,7 +222,7 @@ class _AuthPageState extends State<AuthPage> {
                         },
                         child: Text(
                           'Créer un compte',
-                          style: TextStyle(color: context.textColor, fontWeight: FontWeight.w800),
+                          style: TextStyle(color: context.primaryColor, fontWeight: FontWeight.w800),
                         ),
                       ),
                     ),

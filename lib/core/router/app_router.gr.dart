@@ -11,31 +11,15 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i5;
 import 'package:fit_sessions/features/auth/presentation/pages/auth_page.dart'
-    as _i1;
+    as _i2;
 import 'package:fit_sessions/features/auth/presentation/pages/registration_page.dart'
     as _i3;
-import 'package:fit_sessions/features/home/presentation/home_page.dart' as _i2;
+import 'package:fit_sessions/features/home/presentation/home_page.dart' as _i1;
 import 'package:fit_sessions/features/splash/presentation/pages/splash_page.dart'
     as _i4;
 
 /// generated route for
-/// [_i1.AuthPage]
-class AuthRoute extends _i5.PageRouteInfo<void> {
-  const AuthRoute({List<_i5.PageRouteInfo>? children})
-    : super(AuthRoute.name, initialChildren: children);
-
-  static const String name = 'AuthRoute';
-
-  static _i5.PageInfo page = _i5.PageInfo(
-    name,
-    builder: (data) {
-      return const _i1.AuthPage();
-    },
-  );
-}
-
-/// generated route for
-/// [_i2.HomePage]
+/// [_i1.HomePage]
 class HomeRoute extends _i5.PageRouteInfo<void> {
   const HomeRoute({List<_i5.PageRouteInfo>? children})
     : super(HomeRoute.name, initialChildren: children);
@@ -45,7 +29,23 @@ class HomeRoute extends _i5.PageRouteInfo<void> {
   static _i5.PageInfo page = _i5.PageInfo(
     name,
     builder: (data) {
-      return const _i2.HomePage();
+      return const _i1.HomePage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i2.LoginPage]
+class LoginRoute extends _i5.PageRouteInfo<void> {
+  const LoginRoute({List<_i5.PageRouteInfo>? children})
+    : super(LoginRoute.name, initialChildren: children);
+
+  static const String name = 'LoginRoute';
+
+  static _i5.PageInfo page = _i5.PageInfo(
+    name,
+    builder: (data) {
+      return const _i2.LoginPage();
     },
   );
 }
