@@ -2,6 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:fit_sessions/core/constants/color.dart';
 import 'package:fit_sessions/core/extensions/theme_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
 class AuthPage extends StatefulWidget {
@@ -14,7 +15,6 @@ class AuthPage extends StatefulWidget {
 class _AuthPageState extends State<AuthPage> {
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
-  bool _obscure = true;
 
   @override
   void dispose() {
@@ -25,6 +25,8 @@ class _AuthPageState extends State<AuthPage> {
 
   @override
   Widget build(BuildContext context) {
+    final showPasswordProvider = StateProvider<bool>((ref) => true);
+
     return Scaffold(
       backgroundColor: context.surfaceColor,
       body: SafeArea(
@@ -108,27 +110,33 @@ class _AuthPageState extends State<AuthPage> {
                           hintColor: context.tertiaryTextColor,
                         ),
                         const SizedBox(height: 16),
-                        _InputField(
-                          surface: context.surfaceColor,
-                          borderColor: context.secondaryColor.withValues(alpha: .4),
-                          focusBorderColor: context.secondaryColor.withValues(alpha: 0.50),
-                          focusGlowColor: context.primaryColor.withValues(alpha: 0.20),
-                          icon: Icons.lock,
-                          iconColor: context.tertiaryTextColor,
-                          hint: 'Mot de passe',
-                          controller: _passwordCtrl,
-                          obscureText: _obscure,
-                          textColor: context.textColor,
-                          hintColor: context.tertiaryTextColor,
-                          suffix: IconButton(
-                            onPressed: () => setState(() => _obscure = !_obscure),
-                            icon: Icon(
-                              _obscure ? Icons.visibility : Icons.visibility_off,
-                              size: 20,
-                              color: context.tertiaryTextColor,
-                            ),
-                            splashRadius: 22,
-                          ),
+                        Consumer(
+                          builder: (context, ref, child) {
+                            final showPassword = ref.watch(showPasswordProvider);
+                            return _InputField(
+                              surface: context.surfaceColor,
+                              borderColor: context.secondaryColor.withValues(alpha: .4),
+                              focusBorderColor: context.secondaryColor.withValues(alpha: 0.50),
+                              focusGlowColor: context.primaryColor.withValues(alpha: 0.20),
+                              icon: Icons.lock,
+                              iconColor: context.tertiaryTextColor,
+                              hint: 'Mot de passe',
+                              controller: _passwordCtrl,
+                              obscureText: showPassword,
+                              textColor: context.textColor,
+                              hintColor: context.tertiaryTextColor,
+                              suffix: IconButton(
+                                onPressed: () =>
+                                    ref.read(showPasswordProvider.notifier).state = !showPassword,
+                                icon: Icon(
+                                  showPassword ? Icons.visibility : Icons.visibility_off,
+                                  size: 20,
+                                  color: context.tertiaryTextColor,
+                                ),
+                                splashRadius: 22,
+                              ),
+                            );
+                          },
                         ),
 
                         const SizedBox(height: 10),
