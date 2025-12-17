@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fit_sessions/core/config/di.dart';
 import 'package:fit_sessions/core/config/theme.dart';
 import 'package:fit_sessions/core/router/app_router.dart';
 import 'package:fit_sessions/firebase_options.dart';
@@ -8,6 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await DI.init();
   runApp(MainApp());
 }
 

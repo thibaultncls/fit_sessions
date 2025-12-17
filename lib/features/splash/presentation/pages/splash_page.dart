@@ -7,6 +7,7 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.router.replacePath('/home');
     return const Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 }
