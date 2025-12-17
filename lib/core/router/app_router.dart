@@ -9,6 +9,7 @@ class AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
     AutoRoute(page: HomeRoute.page, guards: [DI.instance<AuthGuard>()], path: '/home'),
     AutoRoute(page: SplashRoute.page, initial: true, path: '/splash'),
-    AutoRoute(page: AuthRoute.page, path: '/auth'),
+    AutoRoute(page: AuthRoute.page, path: '/login'),
+    AutoRoute(page: RegistrationRoute.page, path: '/register'),
   ];
 }
