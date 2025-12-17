@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Global static color palette for the FitSessions app.
-/// Clean, modern, consistent with Material You and your brand identity.
 class AppColors {
   AppColors._(); // Prevent instantiation
 
@@ -38,7 +36,7 @@ class AppColors {
   static const Color errorDark = Color(0xFFB91C1C);
 
   // -----------------------------
-  // TAG COLORS (OPTIONAL)
+  // TAG COLORS
   // -----------------------------
   static const Color tagStrength = Color(0xFF6366F1); // violet
   static const Color tagCardio = Color(0xFF06B6D4); // cyan
@@ -46,8 +44,7 @@ class AppColors {
   static const Color tagBulk = Color(0xFF10B981); // green
 
   // -----------------------------
-  // OPTIONAL DARK THEME SUPPORT
-  // (Useful for Material 3 dynamic theming later)
+  //DARK THEME SUPPORT
   // -----------------------------
   static const Color darkBackground = Color(0xFF000000);
   static const Color darkSurface = Color(0xFF1C1C1E);

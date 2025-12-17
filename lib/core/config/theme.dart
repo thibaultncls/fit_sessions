@@ -36,6 +36,14 @@ class AppTheme {
   static final lightTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: AppColors.primary,
+    colorScheme: ColorScheme.light(
+      primary: AppColors.primary,
+      secondary: AppColors.primaryLight,
+      surface: AppColors.card,
+      onPrimary: AppColors.surface,
+      onSecondary: AppColors.surface,
+      onSurface: AppColors.textPrimary,
+    ),
     scaffoldBackgroundColor: AppColors.background,
     cardColor: AppColors.card,
     dividerColor: AppColors.divider,
