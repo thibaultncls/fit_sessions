@@ -8,4 +8,15 @@ class Failure with _$Failure {
   const factory Failure.cacheError() = _CacheError;
   const factory Failure.validationError(String message) = _ValidationError;
   const factory Failure.unauthorized() = _Unauthorized;
+  const factory Failure.unknown() = _Unknown;
+}
+
+extension FailureMessage on Failure {
+  String get message => when(
+    serverError: () => 'Erreur serveur',
+    cacheError: () => 'Erreur cache',
+    validationError: (m) => m,
+    unauthorized: () => 'Non autorisé',
+    unknown: () => 'Erreur inconnue',
+  );
 }

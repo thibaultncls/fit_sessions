@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fit_sessions/core/errors/exception.dart';
 
 abstract interface class AuthRemoteDataSource {
   Future<bool> isSignedIn();
@@ -11,7 +12,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<bool> isSignedIn() async {
-    final currentUser = _firebaseAuth.currentUser;
-    return currentUser != null;
+    try {
+      final currentUser = _firebaseAuth.currentUser;
+      return currentUser != null;
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(message: e.message ?? 'Firebase Auth Exception');
+    } on Exception catch (e) {
+      throw ServerException(message: e.toString());
+    }
   }
 }

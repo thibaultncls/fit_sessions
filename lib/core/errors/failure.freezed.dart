@@ -55,14 +55,15 @@ extension FailurePatterns on Failure {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _ServerError value)?  serverError,TResult Function( _CacheError value)?  cacheError,TResult Function( _ValidationError value)?  validationError,TResult Function( _Unauthorized value)?  unauthorized,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _ServerError value)?  serverError,TResult Function( _CacheError value)?  cacheError,TResult Function( _ValidationError value)?  validationError,TResult Function( _Unauthorized value)?  unauthorized,TResult Function( _Unknown value)?  unknown,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _ServerError() when serverError != null:
 return serverError(_that);case _CacheError() when cacheError != null:
 return cacheError(_that);case _ValidationError() when validationError != null:
 return validationError(_that);case _Unauthorized() when unauthorized != null:
-return unauthorized(_that);case _:
+return unauthorized(_that);case _Unknown() when unknown != null:
+return unknown(_that);case _:
   return orElse();
 
 }
@@ -80,14 +81,15 @@ return unauthorized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _ServerError value)  serverError,required TResult Function( _CacheError value)  cacheError,required TResult Function( _ValidationError value)  validationError,required TResult Function( _Unauthorized value)  unauthorized,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _ServerError value)  serverError,required TResult Function( _CacheError value)  cacheError,required TResult Function( _ValidationError value)  validationError,required TResult Function( _Unauthorized value)  unauthorized,required TResult Function( _Unknown value)  unknown,}){
 final _that = this;
 switch (_that) {
 case _ServerError():
 return serverError(_that);case _CacheError():
 return cacheError(_that);case _ValidationError():
 return validationError(_that);case _Unauthorized():
-return unauthorized(_that);case _:
+return unauthorized(_that);case _Unknown():
+return unknown(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +106,15 @@ return unauthorized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _ServerError value)?  serverError,TResult? Function( _CacheError value)?  cacheError,TResult? Function( _ValidationError value)?  validationError,TResult? Function( _Unauthorized value)?  unauthorized,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _ServerError value)?  serverError,TResult? Function( _CacheError value)?  cacheError,TResult? Function( _ValidationError value)?  validationError,TResult? Function( _Unauthorized value)?  unauthorized,TResult? Function( _Unknown value)?  unknown,}){
 final _that = this;
 switch (_that) {
 case _ServerError() when serverError != null:
 return serverError(_that);case _CacheError() when cacheError != null:
 return cacheError(_that);case _ValidationError() when validationError != null:
 return validationError(_that);case _Unauthorized() when unauthorized != null:
-return unauthorized(_that);case _:
+return unauthorized(_that);case _Unknown() when unknown != null:
+return unknown(_that);case _:
   return null;
 
 }
@@ -128,13 +131,14 @@ return unauthorized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  serverError,TResult Function()?  cacheError,TResult Function( String message)?  validationError,TResult Function()?  unauthorized,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  serverError,TResult Function()?  cacheError,TResult Function( String message)?  validationError,TResult Function()?  unauthorized,TResult Function()?  unknown,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ServerError() when serverError != null:
 return serverError();case _CacheError() when cacheError != null:
 return cacheError();case _ValidationError() when validationError != null:
 return validationError(_that.message);case _Unauthorized() when unauthorized != null:
-return unauthorized();case _:
+return unauthorized();case _Unknown() when unknown != null:
+return unknown();case _:
   return orElse();
 
 }
@@ -152,13 +156,14 @@ return unauthorized();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  serverError,required TResult Function()  cacheError,required TResult Function( String message)  validationError,required TResult Function()  unauthorized,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  serverError,required TResult Function()  cacheError,required TResult Function( String message)  validationError,required TResult Function()  unauthorized,required TResult Function()  unknown,}) {final _that = this;
 switch (_that) {
 case _ServerError():
 return serverError();case _CacheError():
 return cacheError();case _ValidationError():
 return validationError(_that.message);case _Unauthorized():
-return unauthorized();case _:
+return unauthorized();case _Unknown():
+return unknown();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +180,14 @@ return unauthorized();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  serverError,TResult? Function()?  cacheError,TResult? Function( String message)?  validationError,TResult? Function()?  unauthorized,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  serverError,TResult? Function()?  cacheError,TResult? Function( String message)?  validationError,TResult? Function()?  unauthorized,TResult? Function()?  unknown,}) {final _that = this;
 switch (_that) {
 case _ServerError() when serverError != null:
 return serverError();case _CacheError() when cacheError != null:
 return cacheError();case _ValidationError() when validationError != null:
 return validationError(_that.message);case _Unauthorized() when unauthorized != null:
-return unauthorized();case _:
+return unauthorized();case _Unknown() when unknown != null:
+return unknown();case _:
   return null;
 
 }
@@ -343,6 +349,38 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'Failure.unauthorized()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _Unknown implements Failure {
+  const _Unknown();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Unknown);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'Failure.unknown()';
 }
 
 
