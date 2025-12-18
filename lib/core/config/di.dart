@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_sessions/core/router/guards/auth_guard.dart';
 import 'package:fit_sessions/features/auth/data/data_sources/auth_remote_data_source.dart';
@@ -16,9 +17,12 @@ class DI {
   static Future<void> init() async {
     // register Firebase
     _instance.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
+    _instance.registerLazySingleton(() => FirebaseFirestore.instance);
 
     _instance
-      ..registerFactory<AuthRemoteDataSource>(() => AuthRemoteDataSourceImpl(firebaseAuth: _instance()))
+      ..registerFactory<AuthRemoteDataSource>(
+        () => AuthRemoteDataSourceImpl(firebaseAuth: _instance(), firestore: _instance()),
+      )
       ..registerFactory<AuthRepository>(() => AuthRepositoryImpl(remoteDataSource: _instance()))
       ..registerFactory(() => IsSignedIn(repository: _instance()));
 
