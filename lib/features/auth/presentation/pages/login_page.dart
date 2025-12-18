@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:fit_sessions/core/common/widgets/custom_elevated_button.dart';
 import 'package:fit_sessions/core/constants/color.dart';
 import 'package:fit_sessions/core/extensions/theme_extension.dart';
 import 'package:fit_sessions/features/auth/presentation/widgets/auth_input.dart';
@@ -161,36 +162,23 @@ class _LoginPageState extends State<LoginPage> {
 
                         const SizedBox(height: 8),
 
-                        SizedBox(
-                          width: double.infinity,
-                          height: 56,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              // TODO: submit
-                            },
-                            style:
-                                ElevatedButton.styleFrom(
-                                  backgroundColor: context.primaryColor,
-                                  foregroundColor: AppColors.surface,
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                                ).copyWith(
-                                  overlayColor: WidgetStatePropertyAll(
-                                    context.primaryColor.withValues(alpha: 0.08),
-                                  ),
+                        CustomElevatedButton(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Se connecter',
+                                style: context.textTheme.bodyMedium?.copyWith(
+                                  color: AppColors.surface,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
                                 ),
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Se connecter',
-                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
-                                ),
-                                SizedBox(width: 10),
-                                Icon(Icons.arrow_forward, size: 20),
-                              ],
-                            ),
+                              ),
+                              const SizedBox(width: 10),
+                              const Icon(Icons.arrow_forward, size: 20),
+                            ],
                           ),
+                          onPressed: () {},
                         ),
 
                         const SizedBox(height: 28),
