@@ -2,6 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:fit_sessions/core/common/widgets/custom_elevated_button.dart';
 import 'package:fit_sessions/core/constants/color.dart';
 import 'package:fit_sessions/core/extensions/theme_extension.dart';
+import 'package:fit_sessions/core/state/async_state.dart';
+import 'package:fit_sessions/core/utils/dialog_utils.dart';
+import 'package:fit_sessions/features/auth/presentation/providers/register_provider.dart';
 import 'package:fit_sessions/features/auth/presentation/widgets/auth_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,6 +27,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   final _confirmPasswordCtrl = TextEditingController();
+  final _registerProvider = StateNotifierProvider<RegisterProvider, AsyncState<void>>(
+    (ref) => RegisterProvider(),
+  );
 
   @override
   void dispose() {
@@ -217,17 +223,45 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
                         const SizedBox(height: 24),
 
-                        // Primary button
-                        CustomElevatedButton(
-                          child: Text(
-                            'Créer un compte',
-                            style: context.textTheme.bodyMedium?.copyWith(
-                              color: AppColors.surface,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                            ),
-                          ),
-                          onPressed: () {},
+                        //  button
+                        Consumer(
+                          builder: (context, ref, child) {
+                            final state = ref.watch(_registerProvider);
+                            final isLoading = state.maybeWhen(orElse: () => false, loading: () => true);
+
+                            ref.listen(_registerProvider, (previous, next) {
+                              next.maybeWhen(
+                                error: (message) {
+                                  DialogUtils.showFitSessionsErrorDialog(context: context, message: message);
+                                },
+                                orElse: () {},
+                              );
+                            });
+                            return CustomElevatedButton(
+                              onPressed: isLoading
+                                  ? null
+                                  : () {
+                                      final email = _emailCtrl.text.trim();
+                                      final password = _passwordCtrl.text;
+                                      final confirmPassword = _confirmPasswordCtrl.text;
+                                      final username = _firstNameCtrl.text.trim();
+
+                                      ref
+                                          .read(_registerProvider.notifier)
+                                          .register(email, password, confirmPassword, username);
+                                    },
+                              child: isLoading
+                                  ? const CircularProgressIndicator(color: AppColors.surface)
+                                  : Text(
+                                      'Créer un compte',
+                                      style: context.textTheme.bodyMedium?.copyWith(
+                                        color: AppColors.surface,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                            );
+                          },
                         ),
 
                         const SizedBox(height: 28),
