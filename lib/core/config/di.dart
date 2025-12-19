@@ -28,7 +28,7 @@ class DI {
       ..registerFactory<AuthRepository>(() => AuthRepositoryImpl(remoteDataSource: _instance()))
       ..registerFactory(() => IsSignedIn(repository: _instance()))
       ..registerLazySingleton(() => RoleProvider())
-      ..registerLazySingleton(() => RegisterProvider(role: _instance()));
+      ..registerLazySingleton(() => RegisterProvider());
 
     _instance.registerFactory<AuthGuard>(() => AuthGuard(isSignedIn: _instance()));
   }

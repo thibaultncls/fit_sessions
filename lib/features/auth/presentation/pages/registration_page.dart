@@ -8,14 +8,13 @@ import 'package:fit_sessions/core/utils/dialog_utils.dart';
 import 'package:fit_sessions/features/auth/presentation/providers/register_provider.dart';
 import 'package:fit_sessions/features/auth/presentation/widgets/auth_input.dart';
 import 'package:fit_sessions/features/auth/presentation/widgets/logo_header.dart';
-import 'package:fit_sessions/features/auth/presentation/widgets/role_selector.dart' hide RegisterRole;
+import 'package:fit_sessions/features/auth/presentation/widgets/role_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// Assume you already have:
-// - context.surfaceColor / context.primaryColor / context.textColor / etc.
-// - AppColors.surface
-// - AuthInput widget (exactly as you shared)
+final _registerProvider = StateNotifierProvider<RegisterProvider, AsyncState<void>>(
+  (ref) => DI.instance<RegisterProvider>(),
+);
 
 @RoutePage()
 class RegistrationPage extends StatefulWidget {
@@ -30,10 +29,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   final _confirmPasswordCtrl = TextEditingController();
-
-  final _registerProvider = StateNotifierProvider<RegisterProvider, AsyncState<void>>(
-    (ref) => DI.instance<RegisterProvider>(),
-  );
 
   @override
   void dispose() {
