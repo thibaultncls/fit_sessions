@@ -1,8 +1,10 @@
 import 'package:fit_sessions/core/state/async_state.dart';
+import 'package:fit_sessions/features/auth/presentation/providers/role_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RegisterProvider extends StateNotifier<AsyncState> {
-  RegisterProvider() : super(const AsyncState.initial());
+  final RoleProvider role;
+  RegisterProvider({required this.role}) : super(const AsyncState.initial());
 
   Future<void> register(String email, String password, String confirmPassword, String username) async {
     try {

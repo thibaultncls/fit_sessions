@@ -3,6 +3,7 @@ import 'package:fit_sessions/core/common/widgets/custom_elevated_button.dart';
 import 'package:fit_sessions/core/constants/color.dart';
 import 'package:fit_sessions/core/extensions/theme_extension.dart';
 import 'package:fit_sessions/features/auth/presentation/widgets/auth_input.dart';
+import 'package:fit_sessions/features/auth/presentation/widgets/logo_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -46,30 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(height: 8),
 
                         // Logo area
-                        Column(
-                          children: [
-                            Container(
-                              width: 64,
-                              height: 64,
-                              decoration: BoxDecoration(
-                                color: context.primaryColor.withValues(alpha: 0.20),
-                                shape: BoxShape.circle,
-                                border: Border.all(color: context.primaryColor.withValues(alpha: 0.10)),
-                              ),
-                              child: Icon(Icons.fitness_center, size: 32, color: context.primaryColor),
-                            ),
-                            const SizedBox(height: 12),
-                            Text(
-                              'FitSessions',
-                              style: TextStyle(
-                                color: context.primaryColor,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w800,
-                                letterSpacing: 0.8,
-                              ),
-                            ),
-                          ],
-                        ),
+                        const LogoHeader(),
 
                         const SizedBox(height: 40),
 

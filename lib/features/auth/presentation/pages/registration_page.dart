@@ -1,11 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fit_sessions/core/common/widgets/custom_elevated_button.dart';
+import 'package:fit_sessions/core/config/di.dart';
 import 'package:fit_sessions/core/constants/color.dart';
 import 'package:fit_sessions/core/extensions/theme_extension.dart';
 import 'package:fit_sessions/core/state/async_state.dart';
 import 'package:fit_sessions/core/utils/dialog_utils.dart';
 import 'package:fit_sessions/features/auth/presentation/providers/register_provider.dart';
 import 'package:fit_sessions/features/auth/presentation/widgets/auth_input.dart';
+import 'package:fit_sessions/features/auth/presentation/widgets/logo_header.dart';
+import 'package:fit_sessions/features/auth/presentation/widgets/role_selector.dart' hide RegisterRole;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -27,8 +30,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   final _confirmPasswordCtrl = TextEditingController();
+
   final _registerProvider = StateNotifierProvider<RegisterProvider, AsyncState<void>>(
-    (ref) => RegisterProvider(),
+    (ref) => DI.instance<RegisterProvider>(),
   );
 
   @override
@@ -61,33 +65,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       children: [
                         const SizedBox(height: 8),
 
-                        // Logo Header (comme AuthPage)
-                        Column(
-                          children: [
-                            Container(
-                              width: 56,
-                              height: 56,
-                              decoration: BoxDecoration(
-                                color: context.primaryColor.withValues(alpha: 0.10),
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: Icon(Icons.fitness_center, size: 30, color: context.primaryColor),
-                            ),
-                            const SizedBox(height: 12),
-                            Text(
-                              'FitSessions',
-                              style: TextStyle(
-                                color: context.textColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w800,
-                                letterSpacing: -0.3,
-                                height: 1.0,
-                              ),
-                            ),
-                          ],
-                        ),
+                        // Logo Header
+                        const LogoHeader(),
 
                         const SizedBox(height: 28),
+                        Consumer(
+                          builder: (context, ref, _) {
+                            return RoleSelector();
+                          },
+                        ),
 
                         // Headlines
                         Text(
