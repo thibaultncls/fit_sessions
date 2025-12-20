@@ -14,7 +14,8 @@ import 'package:fit_sessions/features/auth/presentation/pages/login_page.dart'
     as _i2;
 import 'package:fit_sessions/features/auth/presentation/pages/registration_page.dart'
     as _i3;
-import 'package:fit_sessions/features/home/presentation/home_page.dart' as _i1;
+import 'package:fit_sessions/features/home/presentation/pages/home_page.dart'
+    as _i1;
 import 'package:fit_sessions/features/splash/presentation/pages/splash_page.dart'
     as _i4;
 

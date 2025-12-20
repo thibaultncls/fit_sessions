@@ -65,12 +65,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         const LogoHeader(),
 
                         const SizedBox(height: 28),
-                        Consumer(
-                          builder: (context, ref, _) {
-                            return RoleSelector();
-                          },
-                        ),
-                        const SizedBox(height: 28),
 
                         // Headlines
                         Text(
@@ -83,7 +77,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             height: 1.15,
                           ),
                         ),
-                        const SizedBox(height: 8),
                         Text(
                           'Commence ton parcours fitness',
                           textAlign: TextAlign.center,
@@ -93,6 +86,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             fontWeight: FontWeight.w400,
                           ),
                         ),
+                        const SizedBox(height: 28),
+                        RoleSelector(),
 
                         const SizedBox(height: 28),
                         AuthInput(
