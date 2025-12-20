@@ -9,6 +9,7 @@ abstract interface class AuthRemoteDataSource {
     required String email,
     required String password,
     required String name,
+    required String role,
   });
   Future<AuthUserModel> signInWithEmailAndPassword({required String email, required String password});
 }
@@ -38,6 +39,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String email,
     required String password,
     required String name,
+    required String role,
   }) async {
     try {
       final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
@@ -46,7 +48,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
       final user = userCredential.user;
       if (user != null) {
-        final userModel = AuthUserModel(uid: user.uid, email: email, name: name);
+        final userModel = AuthUserModel(uid: user.uid, email: email, name: name, role: role);
         await _firestore.collection('users').doc(user.uid).set(userModel.toJson());
         return userModel;
       } else {

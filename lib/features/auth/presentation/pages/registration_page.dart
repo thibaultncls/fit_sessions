@@ -6,6 +6,7 @@ import 'package:fit_sessions/core/extensions/theme_extension.dart';
 import 'package:fit_sessions/core/state/async_state.dart';
 import 'package:fit_sessions/core/utils/dialog_utils.dart';
 import 'package:fit_sessions/features/auth/presentation/providers/register_provider.dart';
+import 'package:fit_sessions/features/auth/presentation/providers/role_provider.dart';
 import 'package:fit_sessions/features/auth/presentation/widgets/auth_input.dart';
 import 'package:fit_sessions/features/auth/presentation/widgets/logo_header.dart';
 import 'package:fit_sessions/features/auth/presentation/widgets/role_selector.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final _registerProvider = StateNotifierProvider<RegisterProvider, AsyncState<void>>(
   (ref) => DI.instance<RegisterProvider>(),
 );
+final _roleProvider = StateNotifierProvider<RoleProvider, RegisterRole>((ref) => DI.instance<RoleProvider>());
 
 @RoutePage()
 class RegistrationPage extends StatefulWidget {
@@ -208,6 +210,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         Consumer(
                           builder: (context, ref, child) {
                             final state = ref.watch(_registerProvider);
+                            final role = ref.watch(_roleProvider);
                             final isLoading = state.maybeWhen(orElse: () => false, loading: () => true);
 
                             ref.listen(_registerProvider, (previous, next) {
@@ -229,7 +232,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
                                       ref
                                           .read(_registerProvider.notifier)
-                                          .register(email, password, confirmPassword, username);
+                                          .register(email, password, confirmPassword, username, role);
                                     },
                               child: isLoading
                                   ? const CircularProgressIndicator(color: AppColors.surface)

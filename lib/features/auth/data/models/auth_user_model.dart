@@ -6,16 +6,20 @@ part 'auth_user_model.g.dart';
 
 @freezed
 abstract class AuthUserModel with _$AuthUserModel {
-  const factory AuthUserModel({required String uid, required String email, required String name}) =
-      _AuthUserModel;
+  const factory AuthUserModel({
+    required String uid,
+    required String email,
+    required String name,
+    required String role,
+  }) = _AuthUserModel;
 
   factory AuthUserModel.fromJson(Map<String, Object?> json) => _$AuthUserModelFromJson(json);
 }
 
 extension AuthUserModelMapper on AuthUserModel {
-  User toEntity() => User(uid: uid, email: email, name: name);
+  User toEntity() => User(uid: uid, email: email, name: name, role: role);
 }
 
 extension AuthUserEntityMapper on User {
-  AuthUserModel toModel() => AuthUserModel(uid: uid, email: email, name: name);
+  AuthUserModel toModel() => AuthUserModel(uid: uid, email: email, name: name, role: role);
 }

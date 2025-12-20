@@ -11,6 +11,7 @@ _AuthUserModel _$AuthUserModelFromJson(Map<String, dynamic> json) =>
       uid: json['uid'] as String,
       email: json['email'] as String,
       name: json['name'] as String,
+      role: json['role'] as String,
     );
 
 Map<String, dynamic> _$AuthUserModelToJson(_AuthUserModel instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$AuthUserModelToJson(_AuthUserModel instance) =>
       'uid': instance.uid,
       'email': instance.email,
       'name': instance.name,
+      'role': instance.role,
     };
