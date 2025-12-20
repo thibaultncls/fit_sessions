@@ -26,7 +26,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<bool> isSignedIn() async {
     try {
+      // await _firebaseAuth.signOut();
       final currentUser = _firebaseAuth.currentUser;
+
       return currentUser != null;
     } on FirebaseAuthException catch (e) {
       throw AuthException(message: e.message ?? 'Firebase Auth Exception');

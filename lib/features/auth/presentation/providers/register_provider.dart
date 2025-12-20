@@ -19,6 +19,8 @@ class RegisterProvider extends StateNotifier<AsyncState> {
   ) async {
     state = const AsyncState.loading();
 
+    // debugPrint('RegisterProvider: register called with email: $email, username: $username, role: $role');
+
     final result = await _registerUseCase(
       RegisterParams(
         email: email,
@@ -37,5 +39,7 @@ class RegisterProvider extends StateNotifier<AsyncState> {
         state = const AsyncState.success(null);
       },
     );
+
+    // state = const AsyncState.success(null);
   }
 }

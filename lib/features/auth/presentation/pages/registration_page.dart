@@ -17,6 +17,8 @@ final _registerProvider = StateNotifierProvider<RegisterProvider, AsyncState<voi
   (ref) => DI.instance<RegisterProvider>(),
 );
 final _roleProvider = StateNotifierProvider<RoleProvider, RegisterRole>((ref) => DI.instance<RoleProvider>());
+final showPasswordProvider = StateProvider<bool>((ref) => true);
+final showConfirmPasswordProvider = StateProvider<bool>((ref) => true);
 
 @RoutePage()
 class RegistrationPage extends StatefulWidget {
@@ -43,9 +45,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   Widget build(BuildContext context) {
-    final showPasswordProvider = StateProvider<bool>((ref) => true);
-    final showConfirmPasswordProvider = StateProvider<bool>((ref) => true);
-
     return Scaffold(
       backgroundColor: context.surfaceColor,
       body: SafeArea(
@@ -71,6 +70,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             return RoleSelector();
                           },
                         ),
+                        const SizedBox(height: 28),
 
                         // Headlines
                         Text(

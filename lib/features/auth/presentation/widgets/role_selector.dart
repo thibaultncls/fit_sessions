@@ -1,9 +1,10 @@
+import 'package:fit_sessions/core/config/di.dart';
 import 'package:fit_sessions/core/extensions/theme_extension.dart';
 import 'package:fit_sessions/features/auth/presentation/providers/role_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final _roleProvider = StateNotifierProvider<RoleProvider, RegisterRole>((ref) => RoleProvider());
+final _roleProvider = StateNotifierProvider<RoleProvider, RegisterRole>((ref) => DI.instance<RoleProvider>());
 
 class RoleSelector extends ConsumerWidget {
   const RoleSelector({super.key});
