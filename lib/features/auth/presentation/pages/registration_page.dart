@@ -218,6 +218,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 error: (message) {
                                   DialogUtils.showFitSessionsErrorDialog(context: context, message: message);
                                 },
+                                success: (data) {
+                                  context.router.replacePath('/home');
+                                },
                                 orElse: () {},
                               );
                             });

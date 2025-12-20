@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_sessions/core/errors/exception.dart';
 import 'package:fit_sessions/features/auth/data/models/auth_user_model.dart';
+import 'package:flutter/widgets.dart';
 
 abstract interface class AuthRemoteDataSource {
   Future<bool> isSignedIn();
@@ -55,6 +56,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         throw AuthException(message: 'User not found after sign up');
       }
     } on FirebaseAuthException catch (e) {
+      debugPrint('AuthRemoteDataSourceImpl: FirebaseAuthException - ${e.message}');
       throw AuthException(message: e.message ?? 'Firebase Auth Exception');
     } on Exception catch (e) {
       throw ServerException(message: e.toString());

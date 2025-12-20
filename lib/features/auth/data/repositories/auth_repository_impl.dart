@@ -5,6 +5,7 @@ import 'package:fit_sessions/core/errors/failure.dart';
 import 'package:fit_sessions/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:fit_sessions/features/auth/data/models/auth_user_model.dart';
 import 'package:fit_sessions/features/auth/domain/repositories/auth_repository.dart';
+import 'package:flutter/material.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource _remoteDataSource;
@@ -40,9 +41,12 @@ class AuthRepositoryImpl implements AuthRepository {
         role: role,
       );
       return Right(authUserModel.toEntity());
-    } on ServerException catch (_) {
+    } on ServerException catch (e) {
+      debugPrint('AuthRepositoryImpl: ServerException - ${e.message}');
       return Left(Failure.serverError());
-    } on AuthException catch (_) {
+    } on AuthException catch (e) {
+      debugPrint('AuthRepositoryImpl: Unauthorized - ${e.message}');
+
       return Left(Failure.unauthorized());
     } catch (_) {
       return Left(Failure.unknown());
@@ -62,7 +66,8 @@ class AuthRepositoryImpl implements AuthRepository {
       return Right(authUserModel.toEntity());
     } on ServerException catch (_) {
       return Left(Failure.serverError());
-    } on AuthException catch (_) {
+    } on AuthException catch (e) {
+      debugPrint('AuthRepositoryImpl: Unauthorized - ${e.toString()}');
       return Left(Failure.unauthorized());
     } catch (_) {
       return Left(Failure.unknown());

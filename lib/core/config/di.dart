@@ -5,6 +5,7 @@ import 'package:fit_sessions/features/auth/data/data_sources/auth_remote_data_so
 import 'package:fit_sessions/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:fit_sessions/features/auth/domain/repositories/auth_repository.dart';
 import 'package:fit_sessions/features/auth/domain/use_cases/is_signed_in.dart';
+import 'package:fit_sessions/features/auth/domain/use_cases/register.dart';
 import 'package:fit_sessions/features/auth/presentation/providers/register_provider.dart';
 import 'package:fit_sessions/features/auth/presentation/providers/role_provider.dart';
 import 'package:get_it/get_it.dart';
@@ -27,8 +28,9 @@ class DI {
       )
       ..registerFactory<AuthRepository>(() => AuthRepositoryImpl(remoteDataSource: _instance()))
       ..registerFactory(() => IsSignedIn(repository: _instance()))
+      ..registerFactory(() => Register(repository: _instance()))
       ..registerLazySingleton(() => RoleProvider())
-      ..registerLazySingleton(() => RegisterProvider());
+      ..registerLazySingleton(() => RegisterProvider(registerUseCase: _instance()));
 
     _instance.registerFactory<AuthGuard>(() => AuthGuard(isSignedIn: _instance()));
   }
