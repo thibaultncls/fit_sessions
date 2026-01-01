@@ -8,6 +8,11 @@ import 'package:fit_sessions/features/auth/domain/use_cases/is_signed_in.dart';
 import 'package:fit_sessions/features/auth/domain/use_cases/register.dart';
 import 'package:fit_sessions/features/auth/presentation/providers/register_provider.dart';
 import 'package:fit_sessions/features/auth/presentation/providers/role_provider.dart';
+import 'package:fit_sessions/features/home/data/data_sources/home_remote_data_sources.dart';
+import 'package:fit_sessions/features/home/data/repositories/home_repository_impl.dart';
+import 'package:fit_sessions/features/home/domain/repositories/home_repository.dart';
+import 'package:fit_sessions/features/home/domain/use_cases/get_product.dart';
+import 'package:fit_sessions/features/home/presentation/providers/get_product_provider.dart';
 import 'package:get_it/get_it.dart';
 
 class DI {
@@ -31,6 +36,12 @@ class DI {
       ..registerFactory(() => Register(repository: _instance()))
       ..registerLazySingleton(() => RoleProvider())
       ..registerLazySingleton(() => RegisterProvider(registerUseCase: _instance()));
+
+    _instance
+      ..registerFactory<HomeRemoteDataSources>(() => HomeRemoteDataSourcesImpl(firestore: _instance()))
+      ..registerFactory<HomeRepository>(() => HomeRepositoryImpl(remoteDataSources: _instance()))
+      ..registerFactory(() => GetProduct(repository: _instance()))
+      ..registerLazySingleton(() => GetProductProvider(getProductUseCase: _instance()));
 
     _instance.registerFactory<AuthGuard>(() => AuthGuard(isSignedIn: _instance()));
   }
