@@ -4,5 +4,10 @@ part 'product.freezed.dart';
 
 @freezed
 abstract class Product with _$Product {
-  const factory Product({required String id, required String name, required double price}) = _Product;
+  const factory Product({
+    required String id,
+    required String userId,
+    required String name,
+    required double price,
+  }) = _Product;
 }

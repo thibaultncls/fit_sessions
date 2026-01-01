@@ -6,16 +6,20 @@ part 'product_model.g.dart';
 
 @freezed
 abstract class ProductModel with _$ProductModel {
-  const factory ProductModel({required String id, required String name, required double price}) =
-      _ProductModel;
+  const factory ProductModel({
+    required String id,
+    required String userId,
+    required String name,
+    required double price,
+  }) = _ProductModel;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => _$ProductModelFromJson(json);
 }
 
 extension ProductModelMapper on ProductModel {
-  Product toEntity() => Product(id: id, name: name, price: price);
+  Product toEntity() => Product(id: id, userId: userId, name: name, price: price);
 }
 
 extension ProductEntityMapper on Product {
-  ProductModel toModel() => ProductModel(id: id, name: name, price: price);
+  ProductModel toModel() => ProductModel(id: id, userId: userId, name: name, price: price);
 }

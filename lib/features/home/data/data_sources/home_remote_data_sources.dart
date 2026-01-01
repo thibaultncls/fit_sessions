@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fit_sessions/core/errors/exception.dart';
 import 'package:fit_sessions/features/home/data/models/product_model.dart';
+import 'package:flutter/widgets.dart';
 
 abstract interface class HomeRemoteDataSources {
   Future<ProductModel> fetchProduct();
@@ -21,6 +22,7 @@ class HomeRemoteDataSourcesImpl implements HomeRemoteDataSources {
         throw ServerException(message: 'Product not found');
       }
     } catch (e) {
+      debugPrint('Error fetching product: $e');
       throw ServerException(message: e.toString());
     }
   }
